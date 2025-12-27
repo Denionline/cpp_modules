@@ -1,6 +1,6 @@
 #include "include/Contact.hpp"
 
-static void	prompt(string label, string variable) {
+static void	prompt(string label, string& variable) {
 	while (variable.empty()) {
 		cout << label;
 		getline(cin, variable);
@@ -16,6 +16,10 @@ void	Contact::NewContact() {
 	prompt("Nickname: ", this->nickname);
 	prompt("Phone number: ", this->phone_number);
 	prompt("Tell me a darkest secret about you ('-'): ", this->secret);
+}
+
+void	Contact::PrintContact() {
+	cout << this->nickname << std::endl;
 }
 
 Contact::Contact() {
