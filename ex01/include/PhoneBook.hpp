@@ -15,6 +15,7 @@ class PhoneBook {
 	private:
 		Contact	contacts[8];
 		size_t	length;
+		size_t	oldest_idx;
 };
 
 #endif
