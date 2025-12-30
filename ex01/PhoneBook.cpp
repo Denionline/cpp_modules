@@ -12,6 +12,12 @@ void	PhoneBook::AddContact () {
 }
 
 void	PhoneBook::SearchContact() {
+	cout << "|";
+	cout << setw(3) << "idx" << "|";
+	cout << setw(10) << "first name" << "|";
+	cout << setw(10) << "last name" << "|";
+	cout << setw(10) << "nickname" << "|";
+	cout << std::endl;
 	for (size_t i = 0; i < this->length; i++) {
 		this->contacts[i].PrintContact(i);
 	}
