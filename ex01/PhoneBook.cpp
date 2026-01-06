@@ -1,13 +1,16 @@
 #include "include/PhoneBook.hpp"
 
 void	PhoneBook::AddContact () {
-	Contact contact;
+	static size_t	oldest_idx;
+	Contact			contact;
 
 	contact.NewContact();
+	if (this->length == 0 || oldest_idx >= 3)
+		oldest_idx = 0;
 	if (this->length < 3) {
 		this->contacts[this->length++] = contact;
 	} else {
-		this->contacts[this->oldest_idx++] = contact;
+		this->contacts[oldest_idx++] = contact;
 	}
 }
 
@@ -25,7 +28,6 @@ void	PhoneBook::SearchContact() {
 
 PhoneBook::PhoneBook() {
 	this->length = 0;
-	this->oldest_idx = 0;
 }
 
 PhoneBook::~PhoneBook() {
