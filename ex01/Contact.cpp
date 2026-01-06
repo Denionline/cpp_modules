@@ -13,8 +13,6 @@ static string	prompt(string label) {
 }
 
 void	Contact::NewContact() {
-	if (cin.peek() == '\n')
-		cin.ignore();
 	this->first_name = prompt("First name: ");
 	this->last_name = prompt("Last name: ");
 	this->nickname = prompt("Nickname: ");

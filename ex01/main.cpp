@@ -9,8 +9,10 @@ int	main(void) {
 	while (true) {
 		string	prompt;
 
-		cout << std::endl << "Write an option (ADD, SEARCH, EXIT): ";
-		cin >> prompt;
+		cout << "Write an option (ADD, SEARCH, EXIT): ";
+		getline(cin, prompt);
+		if (prompt.empty())
+			continue;
 		if (prompt == "ADD") {
 			Contacts.AddContact();
 		} else if (prompt == "SEARCH") {
