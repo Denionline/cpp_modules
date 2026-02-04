@@ -10,13 +10,15 @@ int	main(void) {
 		string	prompt;
 
 		cout << "Write an option (ADD, SEARCH, EXIT): ";
-		getline(cin, prompt);
+		if (!getline(cin, prompt))
+			break;
+		prompt = trim(prompt);
 		if (prompt.empty())
 			continue;
 		if (prompt == "ADD") {
-			Contacts.AddContact();
+			if (!Contacts.AddContact()) return (1);
 		} else if (prompt == "SEARCH") {
-			Contacts.SearchContact();
+			if (!Contacts.SearchContact()) return (1);
 		} else if (prompt == "EXIT") {
 			break ;
 		} else {

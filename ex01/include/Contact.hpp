@@ -16,8 +16,10 @@ class Contact {
 		Contact();
 		~Contact();
 
-		void	NewContact();
+		bool	NewContact();
 		void	PrintContact(size_t idx);
+		void	PrintContactDetailed();
+		bool	is_valid();
 	private:
 		string	first_name;
 		string	last_name;
@@ -25,5 +27,8 @@ class Contact {
 		string	phone_number;
 		string	secret;
 };
+
+string	trim(const string s);
+int		atoi(string s);
 
 #endif

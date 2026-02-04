@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 10:14:44 by dximenes          #+#    #+#              #
-#    Updated: 2025/12/27 11:43:46 by dximenes         ###   ########.fr        #
+#    Updated: 2026/02/04 12:34:41 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
 # ***************************************make_libft************************************* #
 
 VERSION		= -std=c++98
-CC			= c++ $(VERSION)
+CC			= c++ $(VERSION) -g
 CFLAGS		= -Wall -Wextra -Werror
 MAKE		= make --no-print-directory
 RM			= rm -rf
