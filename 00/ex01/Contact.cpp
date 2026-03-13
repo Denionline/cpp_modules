@@ -1,25 +1,15 @@
 #include "include/Contact.hpp"
 
-int	atoi(string s) {
-	const int	size = s.size();
-	int			result = 0;
-	int			neg = (1);
-	int			i = 0;
+bool	isNumber(std::string str) {
+	const int	size = str.length();
 
-	if (s.empty()) return (-1);
-	while (i < size && std::isspace(s[i])) i++;
-	if (s[i] == '+' || s[i] == '-') {
-		if (s[i] == '-') neg = (-1);
-		i++;
+	for (int i = 0; i < size; i++) {
+		if (!std::isdigit(str[i])) return (false);
 	}
-	for (; i < size && std::isdigit(s[i]); i++) {
-		result = (result * 10) + (s[i] - '0');
-	}
-	if (!std::isdigit(s[i])) return (-1);
-	return (result * neg);
+	return (true);
 }
 
-string	trim(const string s) {
+std::string	trim(const std::string s) {
 	const size_t	size = s.size();
 	size_t			start;
 	size_t			end = 0;
@@ -29,48 +19,52 @@ string	trim(const string s) {
 	return (s.substr(start, end - start));
 }
 
-static int	prompt(string label, string &result) {
-	cout << label;
-	if (!getline(cin, result))
+static int	prompt(std::string label, std::string &result, bool number) {
+	std::cout << label;
+	if (!getline(std::cin, result))
 		return (false);
 	result = trim(result);
+	if (number && !isNumber(result)) {
+		std::cout << "Only numbers allowed!" << std::endl;
+		return (prompt(label, result, number));
+	}
 	if (result.empty()) {
-		cout << "Please fill the field to continue..." << std::endl;
-		return (prompt(label, result));
+		std::cout << "Please fill the field to continue..." << std::endl;
+		return (prompt(label, result, number));
 	}
 	return (true);
 }
 
 bool	Contact::NewContact() {
-	if (!prompt("First name: ", this->first_name)) return (false);
-	if (!prompt("Last name: ", this->last_name)) return (false);
-	if (!prompt("Nickname: ", this->nickname)) return (false);
-	if (!prompt("Phone number: ", this->phone_number)) return (false);
-	if (!prompt("Tell me a darkest secret ('-'): ", this->secret)) return (false);
+	if (!prompt("First name: ", this->first_name, false)) return (false);
+	if (!prompt("Last name: ", this->last_name, false)) return (false);
+	if (!prompt("Nickname: ", this->nickname, false)) return (false);
+	if (!prompt("Phone number: ", this->phone_number, true)) return (false);
+	if (!prompt("Tell me a darkest secret ('-'): ", this->secret, false)) return (false);
 	return (true);
 }
 
-static string	formatColumn(const string &str) {
+static std::string	formatColumn(const std::string &str) {
 	if (str.length() > 10)
 		return (str.substr(0, 9) + ".");
 	return (str);
 }
 
 void	Contact::PrintContact(size_t idx) {
-	cout << "|";
-	cout << setw(3) << idx << "|";
-	cout << setw(10) << formatColumn(this->first_name) << "|";
-	cout << setw(10) << formatColumn(this->last_name) << "|";
-	cout << setw(10) << formatColumn(this->nickname) << "|";
-	cout << std::endl;
+	std::cout << "|";
+	std::cout << std::setw(3) << idx << "|";
+	std::cout << std::setw(10) << formatColumn(this->first_name) << "|";
+	std::cout << std::setw(10) << formatColumn(this->last_name) << "|";
+	std::cout << std::setw(10) << formatColumn(this->nickname) << "|";
+	std::cout << std::endl;
 }
 
 void	Contact::PrintContactDetailed() {
-	cout << "First name: " << this->first_name << std::endl;
-	cout << "Last name: " << this->last_name << std::endl;
-	cout << "Nickname: " << this->nickname << std::endl;
-	cout << "Phone number: " << this->phone_number << std::endl;
-	cout << "Secret: " << this->secret << std::endl;
+	std::cout << "First name: " << this->first_name << std::endl;
+	std::cout << "Last name: " << this->last_name << std::endl;
+	std::cout << "Nickname: " << this->nickname << std::endl;
+	std::cout << "Phone number: " << this->phone_number << std::endl;
+	std::cout << "Secret: " << this->secret << std::endl;
 }
 
 bool	Contact::is_valid() {

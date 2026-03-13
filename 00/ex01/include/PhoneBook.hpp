@@ -9,13 +9,13 @@ class PhoneBook {
 	public:
 		PhoneBook();
 		~PhoneBook();
-
+		
 		bool	AddContact();
-		bool	ShowContactList();
 		bool	SearchContact();
 	private:
 		Contact	contacts[8];
 		size_t	length;
+		bool	ShowContactList();
 };
 
 #endif

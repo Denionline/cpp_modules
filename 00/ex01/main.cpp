@@ -2,15 +2,15 @@
 #include "include/PhoneBook.hpp"
 
 int	main(void) {
-	cout << "Welcome to [PhoneBook]" << std::endl;
+	std::cout << "Welcome to [PhoneBook]" << std::endl;
 	
 	PhoneBook Contacts;
 	
 	while (true) {
-		string	prompt;
+		std::string	prompt;
 
-		cout << "Write an option (ADD, SEARCH, EXIT): ";
-		if (!getline(cin, prompt))
+		std::cout << "Write an option (ADD, SEARCH, EXIT): ";
+		if (!std::getline(std::cin, prompt))
 			break;
 		prompt = trim(prompt);
 		if (prompt.empty())
@@ -22,7 +22,7 @@ int	main(void) {
 		} else if (prompt == "EXIT") {
 			break ;
 		} else {
-			cout << "Invalid option! Try ADD, SEARCH or EXIT" << std::endl;
+			std::cout << "Invalid option! Try ADD, SEARCH or EXIT" << std::endl;
 		}
 	}
 }

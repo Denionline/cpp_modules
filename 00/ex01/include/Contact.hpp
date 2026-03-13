@@ -4,12 +4,7 @@
 
 #include <iostream>
 #include <iomanip>
-
-using std::string;
-using std::cout;
-using std::cin;
-using std::getline;
-using std::setw;
+#include <cstdlib>
 
 class Contact {
 	public:
@@ -17,18 +12,19 @@ class Contact {
 		~Contact();
 
 		bool	NewContact();
-		void	PrintContact(size_t idx);
-		void	PrintContactDetailed();
-		bool	is_valid();
+		void		PrintContactDetailed();
+		bool		is_valid();
+		void		PrintContact(size_t idx);
 	private:
-		string	first_name;
-		string	last_name;
-		string	nickname;
-		string	phone_number;
-		string	secret;
+		std::string	first_name;
+		std::string	last_name;
+		std::string	nickname;
+		std::string	phone_number;
+		std::string	secret;
+
 };
 
-string	trim(const string s);
-int		atoi(string s);
+std::string	trim(const std::string s);
+bool		isNumber(std::string str);
 
 #endif

@@ -5,12 +5,11 @@ bool	PhoneBook::AddContact () {
 	Contact			contact;
 
 	if (!contact.NewContact()) {
-		// contact.~Contact();
 		return (false);
 	}
-	if (this->length == 0 || oldest_idx >= 3)
+	if (this->length == 0 || oldest_idx >= 8)
 		oldest_idx = 0;
-	if (this->length < 3) {
+	if (this->length < 8) {
 		this->contacts[this->length++] = contact;
 	} else {
 		this->contacts[oldest_idx++] = contact;
@@ -21,14 +20,18 @@ bool	PhoneBook::AddContact () {
 bool	PhoneBook::SearchContact() {
 	ShowContactList();
 	while (true) {
-		string	idx_string;
-		int		idx;
-		
-		cout << "Insert a index [0-7]:";
-		if (!getline(cin, idx_string)) return (false);
-		idx = atoi(idx_string);
-		if (idx < 0 || idx > 7) {
-			cout << "Invalid index range between 0 and 7" << std::endl;
+		std::string	idx_string;
+
+		std::cout << "Insert a index [0-7] (To exit type: exit): ";
+		if (!std::getline(std::cin, idx_string)) return (false);
+		if (idx_string == "exit") return (true);
+		if (!isNumber(idx_string)) {
+			std::cout << "Only numbers allowed!" << std::endl;
+			continue;
+		}
+		int	idx = std::strtol(idx_string.c_str(), NULL, 10);
+		if (idx < 0 || idx > 7 || idx_string.size() > 1) {
+			std::cout << "Invalid index range between 0 and 7" << std::endl;
 			continue;
 		}
 		Contact chosen = this->contacts[idx];
@@ -36,19 +39,19 @@ bool	PhoneBook::SearchContact() {
 		if (chosen.is_valid()) {
 			chosen.PrintContactDetailed();
 		} else {
-			cout << "Not found a contact with this index" << std::endl;
+			std::cout << "Not found a contact with this index" << std::endl;
 		}
 	}
 	return (true);
 }
 
 bool	PhoneBook::ShowContactList() {
-	cout << "|";
-	cout << setw(3) << "idx" << "|";
-	cout << setw(10) << "first name" << "|";
-	cout << setw(10) << "last name" << "|";
-	cout << setw(10) << "nickname" << "|";
-	cout << std::endl;
+	std::cout << "|";
+	std::cout << std::setw(3) << "idx" << "|";
+	std::cout << std::setw(10) << "first name" << "|";
+	std::cout << std::setw(10) << "last name" << "|";
+	std::cout << std::setw(10) << "nickname" << "|";
+	std::cout << std::endl;
 	for (size_t i = 0; i < this->length; i++) {
 		this->contacts[i].PrintContact(i);
 	}
