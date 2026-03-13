@@ -13,6 +13,9 @@ Account::Account( int initial_deposit ) {
 	// Locally
 	_amount = initial_deposit;
 	_accountIndex = _nbAccounts;
+	_nbDeposits = 0;
+	_nbWithdrawals = 0;
+
 	// Globally
 	_nbAccounts += 1;
 	_totalAmount += initial_deposit;
