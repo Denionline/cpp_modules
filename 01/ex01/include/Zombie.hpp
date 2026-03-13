@@ -2,7 +2,6 @@
 # define ZOMBIE_H
 
 #include <iostream>
-// #include <iomanip>
 
 using std::string;
 using std::cout;
@@ -20,6 +19,5 @@ class Zombie {
 };
 
 Zombie*	newZombie(string name);
-void	randomChump(string name);
 
 #endif
