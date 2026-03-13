@@ -2,6 +2,8 @@
 # define ZOMBIE_H
 
 #include <iostream>
+#include <iomanip>
+#include <cstdlib>
 
 using std::string;
 using std::cout;
@@ -9,15 +11,15 @@ using std::cin;
 
 class Zombie {
 	public:
-		Zombie(string name);
+		Zombie();
 		~Zombie();
 
-		void	announce(void);
-		Zombie*	newZombie(string name);
+		void	announce( void );
+		void	setName( string );
 	private:
-		string	name;
+		string	_name;
 };
 
-Zombie*	newZombie(string name);
+Zombie* zombieHorde( int N, std::string name );
 
 #endif
