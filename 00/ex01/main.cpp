@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 18:46:21 by dximenes          #+#    #+#             */
+/*   Updated: 2026/03/13 18:46:25 by dximenes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "include/PhoneBook.hpp"
+#include "PhoneBook.hpp"
 
 int	main(void) {
 	std::cout << "Welcome to [PhoneBook]" << std::endl;

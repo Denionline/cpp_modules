@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 10:14:44 by dximenes          #+#    #+#              #
-#    Updated: 2026/03/13 11:18:43 by dximenes         ###   ########.fr        #
+#    Updated: 2026/03/13 18:46:59 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
 # ***************************************make_libft************************************* #
 
 VERSION		= -std=c++98
-CC			= c++ $(VERSION) -g++
+CC			= c++ $(VERSION)
 CFLAGS		= -Wall -Wextra -Werror
 MAKE		= make --no-print-directory
 RM			= rm -rf
@@ -71,10 +71,10 @@ start:
 	@printf "$(C_MAGENTA)===========Program [$(NAME)]===========$(C_STD)\n"
 
 $(NAME): $(BUILD_PATH) $(OBJS)
-	@$(CC) $(CFLAGS) -I$(INC_PATH) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(BUILD_PATH)%.o: %.cpp
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INC_PATH) -c $< -o $@
 	@printf "$(C_YELLOW)Compiling $< -> $@$(C_STD)\n";
 
 $(BUILD_PATH):
