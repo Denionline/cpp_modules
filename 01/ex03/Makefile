@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 10:14:44 by dximenes          #+#    #+#              #
-#    Updated: 2026/03/13 19:58:06 by dximenes         ###   ########.fr        #
+#    Updated: 2026/03/14 11:49:11 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ C_WHITE = \033[0;97m
 #                                    Names                                     #
 # **************************************************************************** #
 
-NAME		= exec
+NAME		= batlle
 
 # **************************************************************************** #
 #                                    Path's                                    #
@@ -45,6 +45,9 @@ VPATH		= ./
 # **************************************************************************** #
 
 FILES		+= main
+FILES		+= HumanA
+FILES		+= HumanB
+FILES		+= Weapon
 
 SRCS		= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
