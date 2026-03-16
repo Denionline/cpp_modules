@@ -3,18 +3,24 @@
 
 void	Harl::complain( std::string level ) {
 	if (!(level == "DEBUG" || level == "INFO" || level == "WARNING" || level == "ERROR")) return;
+	void	(Harl::*functions[])(void) = {
+		&Harl::debug,
+		&Harl::info,
+		&Harl::warning,
+		&Harl::error,
+	};
 	switch (level[0]) {
 		case 'D':
-			debug();
+			(this->*functions[0])();
 			break;
 		case 'I':
-			info();
+			(this->*functions[1])();
 			break;
 		case 'W':
-			warning();
+			(this->*functions[2])();
 			break;
 		case 'E':
-			error();
+			(this->*functions[3])();
 			break;
 		default:
 			break;
