@@ -137,6 +137,5 @@ const Fixed&	Fixed::min( const Fixed& f1, const Fixed& f2 ) {
 }
 
 std::ostream&	operator<<( std::ostream& o, const Fixed& f ) {
-	o << f.toFloat();
-	return (o);
+	return (o << f.toFloat());
 }
