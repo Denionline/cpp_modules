@@ -54,6 +54,5 @@ int		Fixed::toInt() const {
 }
 
 std::ostream&	operator<<( std::ostream& o, const Fixed& f ) {
-	o << f.toFloat();
-	return (o);
+	return (o << f.toFloat());
 }
