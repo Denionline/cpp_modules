@@ -80,8 +80,8 @@ Fixed	Fixed::operator-( const Fixed& other ) {
 }
 
 Fixed	Fixed::operator*( const Fixed& other ) {
-	Fixed	f;
-	long	result;
+	Fixed		f;
+	long long	result;
 
 	result = this->getRawBits() * other.getRawBits();
 	f.setRawBits(result >> _fract);
@@ -89,13 +89,16 @@ Fixed	Fixed::operator*( const Fixed& other ) {
 }
 
 Fixed	Fixed::operator/( const Fixed& other ) {
-	return (
-		Fixed(this->getRawBits() / other.getRawBits())
-	);
+	Fixed		f;
+	long long	result = other.getRawBits();
+
+	result = (result << this->_fract);
+	f.setRawBits(result / other.getRawBits());
+	return (f);
 }
 
 Fixed&	Fixed::operator++( void ) {
-	this->_number = (this->getRawBits() + 1);
+	this->setRawBits(this->getRawBits() + 1);
 	return (*this);
 }
 
@@ -108,7 +111,7 @@ Fixed	Fixed::operator++( int ) {
 }
 
 Fixed&	Fixed::operator--( void ) {
-	this->_number = (this->getRawBits() - 1);
+	this->setRawBits(this->getRawBits() - 1);
 	return (*this);
 }
 
