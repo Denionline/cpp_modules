@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 10:14:44 by dximenes          #+#    #+#              #
-#    Updated: 2026/03/25 17:33:39 by dximenes         ###   ########.fr        #
+#    Updated: 2026/03/22 18:55:30 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ C_WHITE = \033[0;97m
 #                                    Names                                     #
 # **************************************************************************** #
 
-NAME		= ClapTrap
+NAME		= ScavTrap
 
 # **************************************************************************** #
 #                                    Path's                                    #
@@ -46,6 +46,7 @@ VPATH		= ./
 
 FILES		+= main
 FILES		+= ClapTrap
+FILES		+= ScavTrap
 
 SRCS		= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))

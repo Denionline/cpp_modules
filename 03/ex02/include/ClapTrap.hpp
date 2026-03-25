@@ -14,9 +14,9 @@
 #define WHITE   "\033[37m"
 #define BG_DARK "\033[48;5;235m"
 
-# define MAX_HP 10
-# define MAX_EP 10
-# define MAX_AD 0
+# define MAX_HP 100
+# define MAX_EP 50
+# define MAX_AD 20
 
 class ClapTrap {
 	protected:
