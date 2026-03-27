@@ -1,21 +1,23 @@
 #ifndef		CLAPTRAP_H
 # define	CLAPTRAP_H
 
-#include <iostream>
-#include <string>
-#include <iomanip>
+# include <iostream>
+# include <string>
+# include <iomanip>
 
-#define RESET   "\033[0m"
-#define BOLD    "\033[1m"
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define CYAN    "\033[36m"
-#define WHITE   "\033[37m"
-#define BG_DARK "\033[48;5;235m"
+# define RESET   "\033[0m"
+# define BOLD    "\033[1m"
+# define RED     "\033[31m"
+# define GREEN   "\033[32m"
+# define YELLOW  "\033[33m"
+# define CYAN    "\033[36m"
+# define WHITE   "\033[37m"
+# define BG_DARK "\033[48;5;235m"
 
-# define MAX_HP 100
-# define MAX_EP 100
+enum eLIMITS {
+	MAX_HP = 100,
+	MAX_EP = 100,
+};
 
 class ClapTrap {
 	protected:
@@ -27,8 +29,9 @@ class ClapTrap {
 	public:
 		ClapTrap();
 		ClapTrap( std::string );
-		~ClapTrap();
+		ClapTrap( const ClapTrap& );
 		ClapTrap&	operator=( const ClapTrap& );
+		~ClapTrap();
 
 		void	attack( const std::string& );
 		void	takeDamage( unsigned int );

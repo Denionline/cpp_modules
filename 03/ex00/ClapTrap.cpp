@@ -1,7 +1,7 @@
 #include "ClapTrap.hpp"
 
 /* Orthodox */
-ClapTrap::ClapTrap(): _name("('-')"), _hit_points(10), _energy_points(10), _attack_damage(0) {
+ClapTrap::ClapTrap(): _name("Clapex"), _hit_points(10), _energy_points(10), _attack_damage(0) {
 	print_struction("ClapTrap " + _name, "created", GREEN);
 }
 
@@ -9,8 +9,8 @@ ClapTrap::ClapTrap( std::string name ): _name(name), _hit_points(10), _energy_po
 	print_struction("ClapTrap " + _name, "created", GREEN);
 }
 
-ClapTrap::~ClapTrap() {
-	print_struction("ClapTrap " + _name, "destroyed", RED);
+ClapTrap::ClapTrap( const ClapTrap& copy ) {
+	*this = copy;
 }
 
 ClapTrap&	ClapTrap::operator=( const ClapTrap& copy ) {
@@ -24,6 +24,10 @@ ClapTrap&	ClapTrap::operator=( const ClapTrap& copy ) {
 	return (*this);
 }
 
+ClapTrap::~ClapTrap() {
+	print_struction("ClapTrap " + _name, "destroyed", RED);
+}
+
 void	ClapTrap::print_struction(const std::string& name, const std::string& action, const char* color) {
 	const std::string	msg = name + " was " + action;
 	const int			width = msg.length() + 4;
@@ -35,12 +39,12 @@ void	ClapTrap::print_struction(const std::string& name, const std::string& actio
 	std::cout << RESET;
 }
 
-static bool	check_status(int status, std::string action) {
+bool	ClapTrap::check_status(std::string name, int status, std::string action) {
 	if (status <= 0) {
-		std::cout << "Failed to " << action << std::endl;
-		return false;
+		std::cout << name << " failed to " << action << std::endl;
+		return (false);
 	}
-	return true;
+	return (true);
 }
 
 
@@ -59,18 +63,18 @@ static void print_bar(const std::string& label, unsigned int value, unsigned int
 
 void	ClapTrap::print_status( std::string name , int h , int e , int a ) {
 	std::cout << BOLD << std::endl;
-	std::cout << "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n";
+	std::cout << "╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗\n";
 	std::cout << "║ " << std::left << std::setw(18) << ("ClapTrap: " + name);
 	print_bar(" HP", h, MAX_HP, GREEN);
 	print_bar(" EP",  e, MAX_EP, CYAN);
-	std::cout << BOLD << RED << std::left << "AD: " << std::setw(7) << a << RESET << "║";
-	std::cout << "\n╚══════════════════════════════════════════════════════════════════════════════════════════════════╝\n" << RESET;
+	std::cout << BOLD << RED << std::left << " AD: " << std::setw(7) << a << RESET << "║";
+	std::cout << "\n╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝\n" << RESET;
 
 	std::cout << "\n";
 }
 
 void	ClapTrap::attack( const std::string& target ) {
-	if (!check_status(_hit_points, "attack") || !check_status(_energy_points, "attack")) {
+	if (!check_status(_name, _hit_points, "attack") || !check_status(_name, _energy_points, "attack")) {
 		return;
 	}
 	std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attack_damage << " points of damage!" << std::endl;
@@ -78,7 +82,7 @@ void	ClapTrap::attack( const std::string& target ) {
 }
 
 void	ClapTrap::takeDamage( unsigned int amount ) {
-	if (!check_status(_hit_points, "take damage")) {
+	if (!check_status(_name, _hit_points, "take damage")) {
 		return;
 	}
 	_hit_points = amount > _hit_points ? 0 : _hit_points - amount ;
@@ -87,7 +91,7 @@ void	ClapTrap::takeDamage( unsigned int amount ) {
 }
 
 void	ClapTrap::beRepaired( unsigned int amount ) {
-	if (!check_status(_hit_points, "be repaired") || !check_status(_energy_points, "be repaired")) {
+	if (!check_status(_name, _hit_points, "be repaired") || !check_status(_name, _energy_points, "be repaired")) {
 		return;
 	}
 	_energy_points = amount > _energy_points ? 0 : _energy_points - amount ;

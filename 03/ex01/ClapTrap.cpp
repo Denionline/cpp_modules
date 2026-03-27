@@ -1,7 +1,7 @@
 #include "ClapTrap.hpp"
 
 /* Orthodox */
-ClapTrap::ClapTrap(): _name("('-')"), _hit_points(10), _energy_points(10), _attack_damage(0) {
+ClapTrap::ClapTrap(): _name("Clapex"), _hit_points(10), _energy_points(10), _attack_damage(0) {
 	print_struction("ClapTrap " + _name, "created", GREEN);
 }
 
@@ -9,8 +9,8 @@ ClapTrap::ClapTrap( std::string name ): _name(name), _hit_points(10), _energy_po
 	print_struction("ClapTrap " + _name, "created", GREEN);
 }
 
-ClapTrap::~ClapTrap() {
-	print_struction("ClapTrap " + _name, "destroyed", RED);
+ClapTrap::ClapTrap( const ClapTrap& copy ) {
+	*this = copy;
 }
 
 ClapTrap&	ClapTrap::operator=( const ClapTrap& copy ) {
@@ -24,6 +24,10 @@ ClapTrap&	ClapTrap::operator=( const ClapTrap& copy ) {
 	return (*this);
 }
 
+ClapTrap::~ClapTrap() {
+	print_struction("ClapTrap " + _name, "destroyed", RED);
+}
+
 void	ClapTrap::print_struction(const std::string& name, const std::string& action, const char* color) {
 	const std::string	msg = name + " was " + action;
 	const int			width = msg.length() + 4;
@@ -35,7 +39,7 @@ void	ClapTrap::print_struction(const std::string& name, const std::string& actio
 	std::cout << RESET;
 }
 
-static bool	check_status(std::string name, int status, std::string action) {
+bool	ClapTrap::check_status(std::string name, int status, std::string action) {
 	if (status <= 0) {
 		std::cout << name << " failed to " << action << std::endl;
 		return (false);

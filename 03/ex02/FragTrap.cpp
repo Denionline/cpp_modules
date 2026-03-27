@@ -1,6 +1,7 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap() {
+	_name = "Fragex";
 	_hit_points = 100;
 	_energy_points = 100;
 	_attack_damage = 30;
@@ -15,8 +16,8 @@ FragTrap::FragTrap( std::string name ) {
 	print_struction("FragTrap " + _name, "spawned", GREEN);
 }
 
-FragTrap::~FragTrap() {
-	print_struction("FragTrap " + _name, "disappeared", RED);
+FragTrap::FragTrap( const FragTrap& copy) {
+	*this = copy;
 }
 
 FragTrap&	FragTrap::operator=( const FragTrap& copy ) {
@@ -28,6 +29,10 @@ FragTrap&	FragTrap::operator=( const FragTrap& copy ) {
 	}
 	print_struction(copy._name, "assigned to " + _name, YELLOW);
 	return (*this);
+}
+
+FragTrap::~FragTrap() {
+	print_struction("FragTrap " + _name, "disappeared", RED);
 }
 
 void	FragTrap::highFivesGuys( void ) {

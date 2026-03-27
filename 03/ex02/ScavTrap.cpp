@@ -1,6 +1,7 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() {
+	_name = "Scavex";
 	_hit_points = 100;
 	_energy_points = 50;
 	_attack_damage = 20;
@@ -15,8 +16,8 @@ ScavTrap::ScavTrap( std::string name ) {
 	print_struction("ScavTrap " + _name, "created", GREEN);
 }
 
-ScavTrap::~ScavTrap() {
-	print_struction("ScavTrap " + _name, "destroyed", RED);
+ScavTrap::ScavTrap( const ScavTrap& copy) {
+	*this = copy;
 }
 
 ScavTrap&	ScavTrap::operator=( const ScavTrap& copy ) {
@@ -28,6 +29,10 @@ ScavTrap&	ScavTrap::operator=( const ScavTrap& copy ) {
 	}
 	print_struction(copy._name, "assigned to " + _name, YELLOW);
 	return (*this);
+}
+
+ScavTrap::~ScavTrap() {
+	print_struction("ScavTrap " + _name, "destroyed", RED);
 }
 
 void	ScavTrap::attack( const std::string& target ) {

@@ -1,6 +1,7 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() {
+	_name = "Scavex";
 	_hit_points = 100;
 	_energy_points = 50;
 	_attack_damage = 20;
@@ -15,8 +16,8 @@ ScavTrap::ScavTrap( std::string name ) {
 	print_struction("ScavTrap " + _name, "created", GREEN);
 }
 
-ScavTrap::~ScavTrap() {
-	print_struction("ScavTrap " + _name, "destroyed", RED);
+ScavTrap::ScavTrap( const ScavTrap& copy) {
+	*this = copy;
 }
 
 ScavTrap&	ScavTrap::operator=( const ScavTrap& copy ) {
@@ -30,12 +31,8 @@ ScavTrap&	ScavTrap::operator=( const ScavTrap& copy ) {
 	return (*this);
 }
 
-static bool	check_status(std::string name, int status, std::string action) {
-	if (status <= 0) {
-		std::cout << name << " failed to " << action << std::endl;
-		return (false);
-	}
-	return (true);
+ScavTrap::~ScavTrap() {
+	print_struction("ScavTrap " + _name, "destroyed", RED);
 }
 
 void	ScavTrap::attack( const std::string& target ) {
@@ -47,7 +44,7 @@ void	ScavTrap::attack( const std::string& target ) {
 }
 
 void	ScavTrap::guardGate( void ) {
-	if (!check_status(_name, _hit_points, "guard gate") || !check_status(_name,_energy_points, "guard gate")) {
+	if (!check_status(_name, _hit_points, "guard gate")) {
 		return;
 	}
 	std::cout << "ScavTrap " << _name << " is now in Gate keeper mode" << std::endl;

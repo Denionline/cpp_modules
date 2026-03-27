@@ -1,7 +1,7 @@
 #include "ClapTrap.hpp"
 
 /* Orthodox */
-ClapTrap::ClapTrap(): _name("('-')"), _hit_points(10), _energy_points(10), _attack_damage(0) {
+ClapTrap::ClapTrap(): _name("Clapex"), _hit_points(10), _energy_points(10), _attack_damage(0) {
 	print_struction("ClapTrap " + _name, "created", GREEN);
 }
 
@@ -9,8 +9,8 @@ ClapTrap::ClapTrap( std::string name ): _name(name), _hit_points(10), _energy_po
 	print_struction("ClapTrap " + _name, "created", GREEN);
 }
 
-ClapTrap::~ClapTrap() {
-	print_struction("ClapTrap " + _name, "destroyed", RED);
+ClapTrap::ClapTrap( const ClapTrap& copy ) {
+	*this = copy;
 }
 
 ClapTrap&	ClapTrap::operator=( const ClapTrap& copy ) {
@@ -22,6 +22,10 @@ ClapTrap&	ClapTrap::operator=( const ClapTrap& copy ) {
 		this->_attack_damage = copy._attack_damage;
 	}
 	return (*this);
+}
+
+ClapTrap::~ClapTrap() {
+	print_struction("ClapTrap " + _name, "destroyed", RED);
 }
 
 void	ClapTrap::print_struction(const std::string& name, const std::string& action, const char* color) {
