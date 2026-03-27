@@ -35,7 +35,7 @@ void	WrongAnimal::makeSound( void ) const {
 	std::cout << "        /       \\" << std::endl;
 	std::cout << "        \\       /" << std::endl;
 	std::cout << " .-\"\"\"-.-`.-.-.<  _" << std::endl;
-	std::cout << "/      _,-\\ ()()_/:)      " << BOLD << CYAN << "Mama mia" << RESET << std::endl;
+	std::cout << "/      _,-\\ ()()_/:)      " << BOLD << CYAN << "Mama mia not found a sound" << RESET << std::endl;
 	std::cout << "\\     / ,  `     `|" << std::endl;
 	std::cout << " '-..-| \\-.,___,  /" << std::endl;
 	std::cout << "       \\ `-.__/  /" << std::endl;
