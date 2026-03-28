@@ -1,11 +1,13 @@
 #ifndef		DOG_H
 # define	DOG_H
 
-#pragma once
+# include "Animal.hpp"
 
-#include "Animal.hpp"
+# pragma once
 
 class Dog: public Animal {
+	private:
+		Brain*		brain;
 	public:
 		Dog();
 		Dog( const std::string );

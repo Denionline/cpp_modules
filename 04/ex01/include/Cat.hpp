@@ -1,11 +1,13 @@
 #ifndef		CAT_H
 # define	CAT_H
 
-#pragma once
+# include "Animal.hpp"
 
-#include "Animal.hpp"
+# pragma once
 
 class Cat: public Animal {
+	private:
+		Brain*		brain;
 	public:
 		Cat();
 		Cat( const std::string );

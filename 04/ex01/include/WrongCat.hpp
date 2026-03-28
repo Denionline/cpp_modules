@@ -1,9 +1,9 @@
 #ifndef		WRONG_CAT_H
 # define	WRONG_CAT_H
 
-#pragma once
+# include "WrongAnimal.hpp"
 
-#include "WrongAnimal.hpp"
+# pragma once
 
 class WrongCat: public WrongAnimal {
 	public:

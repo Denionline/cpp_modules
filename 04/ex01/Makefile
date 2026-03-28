@@ -26,7 +26,7 @@ SRC_PATH	= src/
 BUILD_PATH	= .build/
 INC_PATH	= include/
 
-VPATH		= ./
+VPATH		= .
 
 # **************************************************************************** #
 #                                    Files                                     #
@@ -41,6 +41,7 @@ FILES		+= WrongAnimal
 
 SRCS		= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
+DEPS		= $(addprefix $(BUILD_PATH), $(addsuffix .d, $(FILES)))
 
 # **************************************************************************** #
 #                                  Compiler                                    #
@@ -49,6 +50,7 @@ OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
 VERSION		= -std=c++98
 CC			= c++ $(VERSION)
 CFLAGS		= -Wall -Wextra -Werror
+IFLAGS		= -MMD -I$(INC_PATH)
 MAKE		= make --no-print-directory
 RM			= rm -rf
 
@@ -65,11 +67,13 @@ $(NAME): $(BUILD_PATH) $(OBJS)
 	@printf "$(C_MAGENTA)✔ Build finished: $(NAME)$(C_STD)\n"
 
 $(BUILD_PATH)%.o: %.cpp
-	@$(CC) $(CFLAGS) -I$(INC_PATH) -c $< -o $@
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 	@printf "\r$(C_YELLOW)[CC] %-60s$(C_STD)" "$<"
 
 $(BUILD_PATH):
 	@mkdir -p $(BUILD_PATH)
+
+-include $(DEPS)
 
 clean:
 	@$(RM) $(BUILD_PATH)
