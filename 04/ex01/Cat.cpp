@@ -1,13 +1,14 @@
 #include "Cat.hpp"
 
-// Orthodoxal
 Cat::Cat() {
 	type = "Cat";
+	brain = new Brain();
 	std::cout << "Wow there is a " << getType() << " here :)" << std::endl;
 }
 
 Cat::Cat( const std::string newType ) {
 	type = newType;
+	brain = new Brain();
 	std::cout << "Wow there is a " << getType() << " here :)" << std::endl;
 }
 
@@ -24,6 +25,7 @@ Cat&	Cat::operator=( const Cat& copy ) {
 }
 
 Cat::~Cat() {
+	delete brain;
 	std::cout << "The " << getType() << " passed away :(" << std::endl;
 }
 
@@ -34,4 +36,16 @@ void	Cat::makeSound( void ) const {
 	std::cout << "    `-.-' \\ )-`( , o o) " << CYAN << "Meow" << YELLOW << std::endl;
 	std::cout << "          `-    \\`_`\"'-" << std::endl;
 	std::cout << RESET << std::endl;
+}
+
+void	Cat::thinkSound( void ) {
+	brain->newIdea("Meow");
+}
+
+void	Cat::forgotSound( void ) {
+	brain->forgotIdea();
+}
+
+void	Cat::showThoughts( void ) {
+	brain->showIdeas();
 }

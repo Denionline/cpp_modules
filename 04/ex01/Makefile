@@ -38,6 +38,7 @@ FILES		+= Cat
 FILES		+= Dog
 FILES		+= WrongCat
 FILES		+= WrongAnimal
+FILES		+= Brain
 
 SRCS		= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))

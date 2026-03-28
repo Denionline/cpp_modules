@@ -1,13 +1,14 @@
 #include "Dog.hpp"
 
-// Orthodoxal
 Dog::Dog() {
 	type = "Dog";
+	brain = new Brain();
 	std::cout << "Uhuul a " << getType() << " is here :D" << std::endl;
 }
 
 Dog::Dog( const std::string newType ) {
 	type = newType;
+	brain = new Brain();
 	std::cout << "Uhuul a " << getType() << " is here :D" << std::endl;
 }
 
@@ -24,6 +25,7 @@ Dog&	Dog::operator=( const Dog& copy ) {
 }
 
 Dog::~Dog() {
+	delete brain;
 	std::cout << "OMG the " << getType() << " died :'(" << std::endl;
 }
 
@@ -37,4 +39,16 @@ void	Dog::makeSound( void ) const {
 	std::cout << " ____|_       ___|   |___.' " << std::endl;
 	std::cout << "/_/_____/____/_______|" << std::endl;
 	std::cout << RESET << std::endl;
+}
+
+void	Dog::thinkSound( void ) {
+	brain->newIdea("Woof woof");
+}
+
+void	Dog::forgotSound( void ) {
+	brain->forgotIdea();
+}
+
+void	Dog::showThoughts( void ) {
+	brain->showIdeas();
 }
