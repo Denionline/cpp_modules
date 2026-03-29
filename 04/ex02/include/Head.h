@@ -2,6 +2,7 @@
 # define	HEAD_H
 
 # include <iostream>
+# include <cstdlib>
 
 enum eLIMITS {
 	MAX_IDEAS = 100

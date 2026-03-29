@@ -7,6 +7,7 @@
 
 class WrongCat: public WrongAnimal {
 	public:
+		/* Orthodoxal */
 		WrongCat();
 		WrongCat( const std::string );
 		WrongCat( const WrongCat& );
