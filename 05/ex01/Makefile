@@ -16,7 +16,7 @@ C_WHITE		= \033[0;97m
 #                                    Names                                     #
 # **************************************************************************** #
 
-NAME		= Animal
+NAME		= Form
 
 # **************************************************************************** #
 #                                    Path's                                    #
@@ -34,6 +34,7 @@ VPATH		= .
 
 FILES		+= main
 FILES		+= Bureaucrat
+FILES		+= Form
 
 SRCS		= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
