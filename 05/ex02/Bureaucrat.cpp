@@ -1,14 +1,14 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat():
 	_name("Bureaucrat"),
-	_grade(1)
+	_grade(150)
 {}
 
 Bureaucrat::Bureaucrat( const std::string name ):
 	_name(name),
-	_grade(1)
+	_grade(150)
 {}
 
 Bureaucrat::Bureaucrat( const size_t grade ):
@@ -54,11 +54,11 @@ Bureaucrat&	Bureaucrat::operator=( const Bureaucrat& copy ) {
 
 Bureaucrat::~Bureaucrat() {}
 
-std::string	Bureaucrat::getName( void ) {
+std::string	Bureaucrat::getName( void ) const {
 	return (YELLOW + this->_name + RESET);
 }
 
-size_t		Bureaucrat::getGrade( void ) {
+size_t		Bureaucrat::getGrade( void ) const {
 	return (this->_grade);
 }
 
@@ -84,8 +84,12 @@ void	Bureaucrat::decreaseGrade( void ) {
 	}
 }
 
-void	Bureaucrat::signForm( Form& f ) {
+void	Bureaucrat::signForm( AForm& f ) {
 	f.beSigned(*this);
+}
+
+void	Bureaucrat::executeForm( const AForm& form ) {
+	form.execute(*this);
 }
 
 std::ostream&	operator<<( std::ostream& o , Bureaucrat& b ) {

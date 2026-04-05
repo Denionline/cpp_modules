@@ -1,53 +1,62 @@
-#include "Form.hpp"
 
-Form::Form():
-	_name("Form"),
+#include "Bureaucrat.hpp"
+#include "AForm.hpp"
+
+AForm::AForm():
+	_name("AForm"),
 	_isSigned(false),
 	_signGrade(5),
 	_executeGrade(5)
 {}
 
-Form::Form( std::string name ):
+AForm::AForm( std::string name ):
 	_name(name),
 	_isSigned(false),
 	_signGrade(5),
 	_executeGrade(5)
 {}
 
-Form::~Form()
+AForm::AForm( std::string name , size_t signGrade , size_t executeGrade ):
+	_name(name),
+	_isSigned(false),
+	_signGrade(signGrade),
+	_executeGrade(executeGrade)
 {}
 
-Form::Form( const Form& f ):
+AForm::~AForm()
+{}
+
+AForm::AForm( const AForm& f ):
 	_name(f._name),
 	_isSigned(f._isSigned),
 	_signGrade(f._signGrade),
 	_executeGrade(f._executeGrade)
 {}
 
-Form&	Form::operator=( const Form& copy ) {
+AForm&	AForm::operator=( const AForm& copy ) {
 	if (this != &copy) {
 		this->_isSigned = copy._isSigned;
 	}
 	return (*this);
 }
 
-const std::string	Form::getName( void ) const {
+const std::string	AForm::getName( void ) const {
 	return (CYAN + this->_name + RESET);
 }
 
-bool	Form::getIsSigned( void ) const {
+bool	AForm::getIsSigned( void ) const {
 	return (this->_isSigned);
 }
 
-size_t	Form::getSignGrade( void ) const {
+size_t	AForm::getSignGrade( void ) const {
 	return (this->_signGrade);
 }
 
-size_t	Form::getExecuteGrade( void ) const {
+size_t	AForm::getExecuteGrade( void ) const {
 	return (this->_executeGrade);
 }
 
-void	Form::beSigned( Bureaucrat& bure ) {
+void	AForm::beSigned( Bureaucrat& bure ) {
 	try	{
 		const size_t	bureGrade = bure.getGrade();
 
@@ -69,7 +78,7 @@ void	Form::beSigned( Bureaucrat& bure ) {
 	}
 }
 
-std::ostream&	operator<<( std::ostream& o, Form& f ) {
+std::ostream&	operator<<( std::ostream& o, AForm& f ) {
 	return (
 		o
 		<< f.getName()

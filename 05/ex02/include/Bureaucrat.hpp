@@ -2,27 +2,7 @@
 #ifndef		BUREAUCRAT_H
 # define	BUREAUCRAT_H
 
-# include <iostream>
-# include <exception>
-
-# ifndef		COLORS
-#  define		COLORS
-#  define RESET   "\033[0m"
-#  define BOLD    "\033[1m"
-#  define RED     "\033[31m"
-#  define GREEN   "\033[32m"
-#  define YELLOW  "\033[33m"
-#  define CYAN    "\033[36m"
-#  define WHITE   "\033[37m"
-#  define BG_DARK "\033[48;5;235m"
-# endif
-
-enum eLIMITS {
-	maxGrade = 1,
-	minGrade = 150
-};
-
-class Form;
+# include "AForm.hpp"
 
 class Bureaucrat {
 	private:
@@ -38,13 +18,15 @@ class Bureaucrat {
 		Bureaucrat&	operator=( const Bureaucrat& );
 		~Bureaucrat();
 
-		std::string	getName( void );
+		std::string	getName( void ) const;
 
-		size_t		getGrade( void );
+		size_t		getGrade( void ) const;
 		void		increaseGrade( void );
 		void		decreaseGrade( void );
 
-		void		signForm( Form& );
+		void		signForm( AForm& );
+
+		void		executeForm( const AForm& );
 
 		class GradeTooHighException: public std::exception {
 			public:

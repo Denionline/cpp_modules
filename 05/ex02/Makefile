@@ -16,7 +16,7 @@ C_WHITE		= \033[0;97m
 #                                    Names                                     #
 # **************************************************************************** #
 
-NAME		= Form
+NAME		= exec
 
 # **************************************************************************** #
 #                                    Path's                                    #
@@ -34,7 +34,10 @@ VPATH		= .
 
 FILES		+= main
 FILES		+= Bureaucrat
-FILES		+= Form
+FILES		+= AForm
+FILES		+= PresidentialPardonForm
+FILES		+= RobotomyRequestForm
+FILES		+= ShrubberyCreationForm
 
 SRCS		= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
@@ -73,6 +76,8 @@ $(BUILD_PATH):
 
 clean:
 	@$(RM) $(BUILD_PATH)
+	@$(RM) *_shrubbery
+
 
 fclean: clean
 	@$(RM) $(NAME)

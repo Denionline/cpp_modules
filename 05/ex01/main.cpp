@@ -1,20 +1,15 @@
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int	main( void ) {
 	{
-		Bureaucrat	bure;
+		Form		form("Formulario");
+		Bureaucrat	bure("BureBure", 5);
 
+		bure.getGrade();
 		std::cout << bure << std::endl;
-
-		bure.increaseGrade();
-
-		for (int i = bure.getGrade(); i < minGrade; i++) {
-			bure.decreaseGrade();
-		}
-
-		std::cout << bure << std::endl;
-
-		bure.decreaseGrade();
+		bure.signForm(form);
+		std::cout << form << std::endl;
 	}
 }

@@ -11,7 +11,7 @@ class Form {
 		const size_t		_signGrade;
 		const size_t		_executeGrade;
 
-		public:
+	public:
 		/* Orthodoxal */
 		Form();
 		Form( const std::string );
@@ -21,22 +21,31 @@ class Form {
 
 		const std::string	getName( void ) const;
 		bool				getIsSigned( void ) const;
-		const size_t		getSignGrade( void ) const;
-		const size_t		getExecuteGrade( void ) const;
+		size_t				getSignGrade( void ) const;
+		size_t				getExecuteGrade( void ) const;
 
+		void				beSigned( Bureaucrat& );
 
-	class GradeTooHighException: public std::exception {
-		public:
-			const char* what() const throw() {
-				return ( BOLD RED "Grade Too High" RESET);
-			}
-	};
-	class GradeTooLowException: public std::exception {
-		public:
-			const char* what() const throw() {
-				return ( BOLD RED "Grade Too Low" RESET);
-			}
-	};
+		class GradeTooHighException: public std::exception {
+			public:
+				const char* what() const throw() {
+					return ( BOLD RED "Grade Too High" RESET);
+				}
+		};
+		class GradeTooLowException: public std::exception {
+			public:
+				const char* what() const throw() {
+					return ( BOLD RED "Grade Too Low" RESET);
+				}
+		};
+		class FormAlreadyAssigned: public std::exception {
+			public:
+				const char* what() const throw() {
+					return ( BOLD RED "Form is already assigned" RESET);
+				}
+		};
 };
+
+std::ostream&	operator<<( std::ostream& , Form& );
 
 #endif
