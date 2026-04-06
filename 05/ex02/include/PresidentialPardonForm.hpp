@@ -1,6 +1,4 @@
-
-#ifndef		PRESIDENTIALPARDONFORM_H
-# define	PRESIDENTIALPARDONFORM_H
+#pragma once
 
 # include "AForm.hpp"
 # include "Bureaucrat.hpp"
@@ -21,5 +19,3 @@ class PresidentialPardonForm: public AForm {
 
 		void		execute( Bureaucrat const& ) const;
 };
-
-#endif

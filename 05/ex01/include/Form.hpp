@@ -1,6 +1,4 @@
-
-#ifndef		FORM_H
-# define	FORM_H
+#pragma once
 
 # include "Bureaucrat.hpp"
 
@@ -47,5 +45,3 @@ class Form {
 };
 
 std::ostream&	operator<<( std::ostream& , Form& );
-
-#endif

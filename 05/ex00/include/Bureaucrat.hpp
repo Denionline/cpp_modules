@@ -1,6 +1,5 @@
 
-#ifndef	BUREAUCRAT_H
-# define	BUREAUCRAT_H
+#pragma once
 
 # include <iostream>
 # include <exception>
@@ -60,5 +59,3 @@ class Bureaucrat {
 };
 
 std::ostream&	operator<<( std::ostream& , Bureaucrat& );
-
-#endif

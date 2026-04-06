@@ -1,6 +1,4 @@
-
-#ifndef		SHRUBBERYCREATIONFORM_H
-# define	SHRUBBERYCREATIONFORM_H
+#pragma once
 
 # include <fstream>
 # include "AForm.hpp"
@@ -22,5 +20,3 @@ class ShrubberyCreationForm: public AForm {
 
 		void		execute( const Bureaucrat& ) const;
 };
-
-#endif

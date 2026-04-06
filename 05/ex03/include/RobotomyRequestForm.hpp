@@ -1,6 +1,4 @@
-
-#ifndef		ROBOTOMYREQUESTFORM_H
-# define	ROBOTOMYREQUESTFORM_H
+#pragma once
 
 # include "AForm.hpp"
 # include "Bureaucrat.hpp"
@@ -21,5 +19,3 @@ class RobotomyRequestForm: public AForm {
 
 		void		execute( Bureaucrat const& ) const;
 };
-
-#endif

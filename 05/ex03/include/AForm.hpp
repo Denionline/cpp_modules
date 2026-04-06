@@ -1,23 +1,18 @@
-
-#ifndef		AFORM_H
-# define	AFORM_H
+#pragma once
 
 # include <iostream>
 # include <cstdlib>
 # include <exception>
 # include <ctime>
 
-# ifndef		COLORS
-#  define		COLORS
-#  define RESET   "\033[0m"
-#  define BOLD    "\033[1m"
-#  define RED     "\033[31m"
-#  define GREEN   "\033[32m"
-#  define YELLOW  "\033[33m"
-#  define CYAN    "\033[36m"
-#  define WHITE   "\033[37m"
-#  define BG_DARK "\033[48;5;235m"
-# endif
+# define RESET   "\033[0m"
+# define BOLD    "\033[1m"
+# define RED     "\033[31m"
+# define GREEN   "\033[32m"
+# define YELLOW  "\033[33m"
+# define CYAN    "\033[36m"
+# define WHITE   "\033[37m"
+# define BG_DARK "\033[48;5;235m"
 
 enum eLIMITS {
 	maxGrade = 1,
@@ -84,5 +79,3 @@ class AForm {
 };
 
 std::ostream&	operator<<( std::ostream& , AForm& );
-
-#endif
