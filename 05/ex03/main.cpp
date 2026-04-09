@@ -12,8 +12,9 @@ int	main( void ) {
 	Intern		i;
 
 	f = i.makeForm("PresidentialPardonForm", "Mibombo");
-	f->beSigned(bure);
-	f->execute(bure);
-
+	if (f) {
+		f->beSigned(bure);
+		f->execute(bure);
+	}
 	delete f;
 }

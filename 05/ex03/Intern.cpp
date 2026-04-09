@@ -20,6 +20,7 @@ AForm*	Intern::makeForm( std::string formName , std::string target) {
 	try {
 		if (!(formName == "ShrubberyCreationForm" || formName == "RobotomyRequestForm" || formName == "PresidentialPardonForm"))
 			throw FormNameNotFound();
+		std::cout << "Intern creates " << formName << std::endl;
 		switch (*formName.c_str()) {
 			case 'S':
 				return (new ShrubberyCreationForm(target));
