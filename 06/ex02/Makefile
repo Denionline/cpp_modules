@@ -33,7 +33,8 @@ VPATH		= .
 # **************************************************************************** #
 
 FILES		+= main
-FILES		+= Serializer
+FILES		+= Base
+FILES		+= aux
 
 SRCS		= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS		= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
