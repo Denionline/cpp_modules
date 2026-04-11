@@ -31,16 +31,24 @@ void	identify( Base* p ) {
 }
 
 static std::string	getReferenceType( Base& c ) {
-	if (dynamic_cast<A&>(c))
+	try {
+		static_cast<void>(dynamic_cast<A&>(c));
 		return ("A");
-	if (dynamic_cast<B&>(c))
+	} catch (...) {}
+
+	try {
+		static_cast<void>(dynamic_cast<B&>(c));
 		return ("B");
-	if (dynamic_cast<C&>(c))
+	} catch (...) {}
+
+	try {
+		static_cast<void>(dynamic_cast<C&>(c));
 		return ("C");
+	} catch (...) {}
 	return (NULL);
 }
 
 void	identify( Base& p ) {
-	std::cout << "object referenced to " << getType(p) << std::endl;
+	std::cout << "object referenced to " << getReferenceType(p) << std::endl;
 }
 

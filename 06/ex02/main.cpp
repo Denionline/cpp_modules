@@ -2,7 +2,7 @@
 
 int	main( void ) {
 	Base*	a = new A;
-	Base*	b = new B;
+	A	b;
 
 	identify(a);
 	identify(b);
