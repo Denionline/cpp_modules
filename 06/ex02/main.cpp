@@ -7,5 +7,5 @@ int	main( void ) {
 	identify(a);
 	identify(b);
 
-	delete A;
+	delete a;
 }
