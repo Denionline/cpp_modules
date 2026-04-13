@@ -3,7 +3,7 @@
 #include <iostream>
 
 template <typename T>
-void	swap(T t1, T t2) {
+void	swap(T& t1, T& t2) {
 	T	t = t1;
 	t1 = t2;
 	t2 = t;
