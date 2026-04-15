@@ -4,8 +4,8 @@
 #include "Array.tpp"
 
 class Array {
-	private:
-	public:
-		Array(/* args */) {}
-		~Array() {}
+		private:
+		public:
+			Array();
+			~Array();
 };
