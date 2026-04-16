@@ -14,8 +14,14 @@ enum eType {
 };
 
 class ScalarConverter {
+	/* Orthodoxal Unused Functions */
+	private:
+		ScalarConverter();
+		ScalarConverter( ScalarConverter& );
+		ScalarConverter&	operator=( ScalarConverter& copy );
+		~ScalarConverter();
+
 	public:
-		virtual ~ScalarConverter() = 0;
 		static void	convert( const std::string& );
 
 		class NumberTooLarge: public std::exception {
