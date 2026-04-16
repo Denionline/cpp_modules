@@ -28,7 +28,7 @@ class Array {
 			{}
 
 			T&	operator[]( __uint32_t idx ) {
-				if (idx >= _length) throw OutOfBounds();
+				if (idx < 0 || idx >= _length) throw OutOfBounds();
 				return (_array[idx]);
 			}
 
