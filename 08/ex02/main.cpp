@@ -36,6 +36,8 @@ int main( void ) {
 		mstack.push_back(5);
 		mstack.push_back(17);
 
+		std::cout << mstack.back() << std::endl;
+
 		mstack.pop_back();
 
 		std::cout << mstack.size() << std::endl;
@@ -51,10 +53,9 @@ int main( void ) {
 		std::cout << "Container {";
 		(++it, --it);
 		while (it != ite) {
-			std::cout << *it << ((it + 1) != ite ? ", " : "");
-			++it;
+			std::cout << *it++;
+			std::cout << (it != ite ? ", " : "");
 		}
 		std::cout << "}" << std::endl;
-		// std::stack<int> s(mstack);
 	}
 }
