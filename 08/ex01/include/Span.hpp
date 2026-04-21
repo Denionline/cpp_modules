@@ -12,8 +12,11 @@ class Span {
 		std::vector<int>	_numbers;
 		size_t						_maxSize;
 	public:
+		/* Orthodoxal */
 		Span( void );
 		Span( __int32_t );
+		Span( const Span& );
+		Span&	operator=( const Span& );
 		~Span();
 
 		void			addNumber( int );

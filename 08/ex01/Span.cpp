@@ -8,9 +8,20 @@ Span::Span( __int32_t n ): _maxSize(n) {
 	_numbers.reserve(n);
 }
 
+Span::Span( const Span& copy ) {
+	*this = copy;
+}
+
+Span&	Span::operator=( const Span& copy ) {
+	if (this != &copy) {
+		this->_numbers = copy._numbers;
+		this->_maxSize = copy._maxSize;
+	}
+	return (*this);
+}
+
 Span::~Span()
 {}
-
 
 void	Span::addNumber( int newNumber ) {
 	if (_numbers.size() >= _maxSize)
