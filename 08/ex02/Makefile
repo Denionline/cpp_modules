@@ -33,7 +33,6 @@ VPATH				= .
 # **************************************************************************** #
 
 FILES				+= main
-FILES				+= Span
 
 SRCS				= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS				= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
