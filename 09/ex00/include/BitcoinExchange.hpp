@@ -8,20 +8,28 @@
 #include <ctime>
 #include <exception>
 #include <vector>
+#include <iomanip>
 
 struct Data {
 	std::tm			date;
+	std::string			sdate;
 	float				rate;
+	std::string			srate;
 };
 
 class BitcoinExchange {
 	private:
-		std::vector<Data>	data;
+		std::vector<Data>	_data;
 	public:
 		BitcoinExchange();
 		BitcoinExchange( const BitcoinExchange& );
 		BitcoinExchange&	operator=( const BitcoinExchange& );
 		~BitcoinExchange();
+
+		static std::tm						convertDate( std::string );
+		static std::vector<Data>	parseDataFile( std::string );
+
+		static void								print( std::vector<Data> );
 
 
 	class FileNotFound: public std::exception {
@@ -30,22 +38,22 @@ class BitcoinExchange {
 				return ("Error to open the file");
 			}
 	};
-	class CSVInvalidDate: public std::exception {
+	class InvalidDate: public std::exception {
 		public:
 			const char*	what() const throw() {
-				return ("There is an invalid date in CSV file");
+				return ("There is an invalid date in file");
 			}
 	};
-	class CSVInvalidRate: public std::exception {
+	class InvalidRate: public std::exception {
 		public:
 			const char*	what() const throw() {
-				return ("There is an invalid rate in CSV file");
+				return ("There is an invalid rate in file");
 			}
 	};
-	class CSVInvalidArgument: public std::exception {
+	class InvalidArgument: public std::exception {
 		public:
 			const char*	what() const throw() {
-				return ("There is an invalid argument in CSV file");
+				return ("There is an invalid argument in file");
 			}
 	};
 };

@@ -6,11 +6,9 @@ int	main( int argc , char *argv[] ) {
 		std::cout << "Correct usage: ./btc <file.txt>" << std::endl;
 		return (1);
 	}
-	try	{
-		BitcoinExchange	b;
-	}
-	catch(const std::exception& e) {
-		std::cerr << e.what() << std::endl;
-	}
+	BitcoinExchange	b;
 
+	std::vector<Data>	input = BitcoinExchange::parseDataFile(*argv);
+
+	BitcoinExchange::print(input);
 }
