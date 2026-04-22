@@ -33,6 +33,7 @@ VPATH				= .
 # **************************************************************************** #
 
 FILES				+= main
+FILES				+= BitcoinExchange
 
 SRCS				= $(addprefix ./, $(addsuffix .cpp, $(FILES)))
 OBJS				= $(addprefix $(BUILD_PATH), $(addsuffix .o, $(FILES)))
@@ -71,7 +72,6 @@ $(BUILD_PATH):
 
 clean:
 	@$(RM) $(BUILD_PATH)
-	@$(RM) *_shrubbery
 
 
 fclean: clean
