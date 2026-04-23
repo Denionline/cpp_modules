@@ -3,9 +3,16 @@
 BitcoinExchange::BitcoinExchange(): _data(parseDataFile("data.csv"))
 {}
 
-// BitcoinExchange::BitcoinExchange( const BitcoinExchange& ) {}
+BitcoinExchange::BitcoinExchange( const BitcoinExchange& copy ) {
+	*this = copy;
+}
 
-// BitcoinExchange&	BitcoinExchange::operator=( const BitcoinExchange& ) {}
+BitcoinExchange&	BitcoinExchange::operator=( const BitcoinExchange& copy ) {
+	if (this != &copy) {
+		this->_data = copy._data;
+	}
+	return (*this);
+}
 
 BitcoinExchange::~BitcoinExchange()
 {}
@@ -24,40 +31,40 @@ std::vector<Data>	BitcoinExchange::parseDataFile( std::string fileName ) {
 	char							del = fileName.find(".csv") != std::string::npos ? ',' : '|';
 
 	try {
-		if (!file.is_open())
+		if (fileName.empty() || !file.is_open())
 			throw ExceptionError("could not open file.");
+		std::string	line;
+		std::getline(file, line);
+		while (std::getline(file, line)) {
+			if (line.empty()) continue;
+			std::stringstream	sline(line);
+			std::string				cell;
+			Data							data = {};
+
+			for (int times = 0; std::getline(sline, cell, del); times++) {
+				if (cell.empty()) continue;
+				if (times == 0) {
+					if (del == ',')
+						data.date = convertDate(cell);
+					data.sdate = cell;
+				} else if (times == 1) {
+					data.rate = std::atof(cell.c_str());
+					data.srate = cell;
+				} else {
+					break;
+				}
+			}
+			array.push_back(data);
+		}
 	}
 	catch(const std::exception& e) {
-		std::cerr << e.what() << ": " << fileName << std::endl;
-	}
-
-	std::string	line;
-	std::getline(file, line);
-	while (std::getline(file, line)) {
-		std::stringstream	sline(line);
-		std::string				cell;
-		Data							data = {};
-
-		for (int times = 0; std::getline(sline, cell, del); times++) {
-			if (cell.empty()) continue;
-			if (times == 0) {
-				if (del == ',')
-					data.date = convertDate(cell);
-				data.sdate = cell;
-			} else if (times == 1) {
-				data.rate = std::atof(cell.c_str());
-				data.srate = cell;
-			} else {
-				break;
-			}
-		}
-		array.push_back(data);
+		std::cerr << e.what() << std::endl;
 	}
 	return (array);
 }
 
 static bool	isValidDate( std::tm t ) {
-	if (t.tm_mon < 0 || t.tm_mon > 12)
+	if (t.tm_mon < 0 || t.tm_mon > 11)
 		return (false);
 	if (t.tm_mday < 0 || t.tm_mday > 31)
 		return (false);
@@ -69,12 +76,14 @@ static bool	isValidDate( std::tm t ) {
 }
 
 std::tm	BitcoinExchange::convertDate( std::string s ) {
+	if (s.length() < 10)
+		throw ExceptionError("bad input => " + s);
 	const std::string	y = s.substr(0,4), m = s.substr(5,2), d = s.substr(8,2);
 
 	if (!(y.length() == 4 && m.length() == 2 && d.length() == 2))
-		throw InvalidDate(s);
+		throw ExceptionError("bad input => " + s);
 	if (!(isAllDigit(y) && isAllDigit(m) && isAllDigit(d)))
-		throw InvalidDate(s);
+		throw ExceptionError("bad input => " + s);
 
 	std::tm	t = {};
 	t.tm_year = std::atoi(y.c_str()) - 1900;
@@ -82,7 +91,7 @@ std::tm	BitcoinExchange::convertDate( std::string s ) {
 	t.tm_mday = std::atoi(d.c_str());
 
 	if (!isValidDate(t))
-		throw InvalidDate(s);
+		throw ExceptionError("bad input => " + s);
 
 	return (t);
 }
@@ -122,21 +131,6 @@ void	BitcoinExchange::executeExchange( std::vector<Data> source ) {
 		catch(const std::exception& e) {
 			std::cerr << e.what() << std::endl;
 		}
-		it++;
-	}
-}
-
-void	BitcoinExchange::print( std::vector<Data> data ) {
-	std::vector<Data>::iterator	it = data.begin(), ite = data.end();
-
-	for (int i = 0; it != ite; i++) {
-		std::cout
-		<< (i < 10 ? "0" : "") << i
-		<< std::setw(5) << " "
-		<< (*it).sdate
-		<< ((*it).srate.empty() ? "" : " - ")
-		<< (*it).srate
-		<< std::endl;
 		it++;
 	}
 }

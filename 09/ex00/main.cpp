@@ -2,16 +2,12 @@
 
 int	main( int argc , char *argv[] ) {
 	(--argc, argv++);
-	try {
 
-		BitcoinExchange	b;
+	std::string	inputFile = !argc ? "" : *argv;
 
-		std::vector<Data>	input = BitcoinExchange::parseDataFile(*argv);
+	BitcoinExchange	b;
 
-		b.executeExchange(input);
-	}
-	catch(const std::exception& e) {
-		std::cerr << e.what() << '\n';
-	}
+	std::vector<Data>	input = BitcoinExchange::parseDataFile(inputFile);
 
+	b.executeExchange(input);
 }
