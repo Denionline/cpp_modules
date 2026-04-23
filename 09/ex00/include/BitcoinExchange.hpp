@@ -31,29 +31,28 @@ class BitcoinExchange {
 
 		static void								print( std::vector<Data> );
 
+		void											executeExchange( std::vector<Data> );
 
-	class FileNotFound: public std::exception {
-		public:
-			const char*	what() const throw() {
-				return ("Error to open the file");
-			}
-	};
 	class InvalidDate: public std::exception {
+		private:
+			std::string	_msg;
 		public:
-			const char*	what() const throw() {
-				return ("There is an invalid date in file");
+			InvalidDate( std::string date ): _msg("Error: bad input => " + date)
+			{}
+			virtual ~InvalidDate() throw() {}
+			virtual const char*	what() const throw() {
+				return _msg.c_str();
 			}
 	};
-	class InvalidRate: public std::exception {
+	class ExceptionError: public std::exception {
+		private:
+			std::string	_msg;
 		public:
-			const char*	what() const throw() {
-				return ("There is an invalid rate in file");
-			}
-	};
-	class InvalidArgument: public std::exception {
-		public:
-			const char*	what() const throw() {
-				return ("There is an invalid argument in file");
+			ExceptionError( std::string msg ): _msg("Error: " + msg)
+			{}
+			virtual ~ExceptionError() throw() {}
+			virtual const char*	what() const throw() {
+				return _msg.c_str();
 			}
 	};
 };
