@@ -8,7 +8,7 @@ PmergeMe::PmergeMe( char *args[] , size_t len ) {
 		size_t	n = std::atoi(args[i]);
 
 		_data_queue.push(n);
-		_data_list.push_front(n);
+		_data_list.push_back(n);
 	}
 }
 
@@ -112,12 +112,12 @@ static std::list<int> getSortedList( std::list<int> input ) {
 	std::list<int>::iterator it = input.begin(), ite = input.end();
 	while (it != ite) {
 		int	a = *it++;
-		int	b = *it++;
-
 		if (it == ite) {
 				small.push_back(a);
 				break;
 		}
+
+		int	b = *it++;
 
 		small.push_back(a < b ? a : b);
 		large.push_back(a > b ? a : b);
@@ -137,7 +137,7 @@ void	PmergeMe::printList( void ) {
 
 	std::cout << "Container {";
 	while (it != ite) {
-		std::cout << *(ite++) << (it != ite ? ", " : "");
+		std::cout << *(it++) << (it != ite ? ", " : "");
 	}
 	std::cout << "}" << std::endl;
 }
