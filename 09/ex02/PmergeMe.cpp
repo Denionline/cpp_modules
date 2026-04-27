@@ -8,91 +8,140 @@ PmergeMe::PmergeMe( char *args[] , size_t len ) {
 		size_t	n = std::atoi(args[i]);
 
 		_data_queue.push(n);
-		_data_list.push_back(n);
+		_data_list.push_front(n);
 	}
 }
 
 PmergeMe::~PmergeMe()
 {}
 
+/* Queue Sorting */
 
+static void sortedInsertQueue(std::queue<int>& q, int value) {
+	std::queue<int>	temp;
+	bool inserted = false;
 
-void	PmergeMe::print( void ) {
-	std::queue<size_t>	n(_data_queue);
+	while (!q.empty()) {
+			if (!inserted && value < q.front()) {
+					temp.push(value);
+					inserted = true;
+			}
+			temp.push(q.front());
+			q.pop();
+	}
 
-	while (!n.empty()) {
-		std::cout << n.front() << std::endl;
-		n.pop();
+	if (!inserted)
+			temp.push(value);
+
+	while (!temp.empty())
+	{
+			q.push(temp.front());
+			temp.pop();
 	}
 }
 
-std::queue<size_t>	PmergeMe::getQueue( void ) {
-	return (_data_queue);
-}
+static std::queue<int> getSortedQueue( std::queue<int> input ) {
+	if (input.size() <= 1)
+			return input;
 
-std::list<size_t>	PmergeMe::getList( void ) {
-	return (_data_list);
-}
+	std::queue<int> small;
+	std::queue<int> large;
 
-/* Sorting Functions */
+	while (!input.empty()) {
+			int a = input.front(); input.pop();
 
-void binaryInsert(std::vector<size_t>& arr, size_t value) {
-    std::vector<size_t>::iterator pos =
-        std::lower_bound(arr.begin(), arr.end(), value);
-    arr.insert(pos, value);
-}
+			if (input.empty()) {
+					small.push(a);
+					break;
+			}
 
-std::vector<size_t> buildInsertionOrder(size_t n) {
-    std::vector<size_t> order;
-    std::vector<bool> used(n, false);
+			int b = input.front(); input.pop();
 
-    size_t step = 1;
-    while ((size_t)order.size() < n)
-    {
-        for (size_t i = step - 1; i < n; i += step * 2)
-        {
-            if (!used[i])
-            {
-                order.push_back(i);
-                used[i] = true;
-            }
-        }
-        step *= 2;
-    }
-    return order;
-}
-
-std::vector<size_t>	FJASort( std::vector<size_t> data ) {
-	size_t	size = data.size();
-
-	if (size < 2)
-		return (data);
-
-	std::vector< std::pair<size_t, size_t> >	pairs;
-	for (size_t i = 0; i < size; i += 2) {
-		pairs.push_back(std::make_pair(data[i], data[i + (i + 1 < size)]));
+			if (a < b) {
+					small.push(a);
+					large.push(b);
+			}
+			else {
+					small.push(b);
+					large.push(a);
+			}
 	}
-	
-	std::vector<size_t>	small;
-	std::vector<size_t>	large;
 
-	for (size_t i = 0; i < pairs.size(); i++) {
-		size_t a = pairs[i].first, b = pairs[i].second;
+	std::queue<int> mainChain = getSortedQueue(large);
+
+	while (!small.empty()) {
+			int val = small.front();
+			small.pop();
+
+			sortedInsertQueue(mainChain, val);
+	}
+
+	return (mainChain);
+}
+
+void	PmergeMe::FJASqueue( void ) {
+	_data_queue = getSortedQueue(_data_queue);
+}
+
+void	PmergeMe::printQueue( void ) {
+	std::queue<int>	c(_data_queue);
+
+	std::cout << "Container {";
+	while (!c.empty()) {
+		std::cout << c.front() << (c.size() > 1 ? ", " : "");
+		c.pop();
+	}
+	std::cout << "}" << std::endl;
+}
+
+/* List Sorting */
+
+static void sortedInsertList(std::list<int>& l, int value) {
+	std::list<int>::iterator it = l.begin(), ite = l.end();
+
+	while (it != ite && *it < value)
+			++it;
+	l.insert(it, value);
+}
+
+static std::list<int> getSortedList( std::list<int> input ) {
+	if (input.size() <= 1)
+			return input;
+
+	std::list<int> small, large;
+	std::list<int>::iterator it = input.begin(), ite = input.end();
+	while (it != ite) {
+		int	a = *it++;
+		int	b = *it++;
+
+		if (it == ite) {
+				small.push_back(a);
+				break;
+		}
 
 		small.push_back(a < b ? a : b);
 		large.push_back(a > b ? a : b);
 	}
 
-	std::vector<size_t> mainChain = FJASort(large);
+	std::list<int> mainChain = getSortedList(large);
 
-    std::vector<size_t> order = buildInsertionOrder(small.size());
+	for (std::list<int>::iterator sit = small.begin(); sit != small.end(); ++sit)
+			sortedInsertList(mainChain, *sit);
 
-    for (size_t i = 0; i < order.size(); ++i)
-    {
-        size_t idx = order[i];
-        if (idx < (size_t)small.size())
-            binaryInsert(mainChain, small[idx]);
-    }
+	return (mainChain);
+}
 
-    return mainChain;
+void	PmergeMe::printList( void ) {
+	std::list<int>	c(_data_list);
+	std::list<int>::iterator it = c.begin(), ite = c.end();
+
+	std::cout << "Container {";
+	while (it != ite) {
+		std::cout << *(ite++) << (it != ite ? ", " : "");
+	}
+	std::cout << "}" << std::endl;
+}
+
+void	PmergeMe::FJASlist( void ) {
+	_data_list = getSortedList(_data_list);
 }

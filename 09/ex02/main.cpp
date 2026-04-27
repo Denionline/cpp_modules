@@ -10,7 +10,10 @@ int	main( int argc , char *argv[] ) {
 		return (1);
 	}
 
+
 	PmergeMe	numbers(argv, argc);
 
-	numbers.print();
+	numbers.printList();
+	numbers.FJASqueue();
+	numbers.printList();
 }
