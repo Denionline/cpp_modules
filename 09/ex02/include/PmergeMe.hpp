@@ -1,7 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include <ctime>
 #include <cstdlib>
+#include <sys/time.h>
 /* Containers */
 #include <queue>
 #include <list>
@@ -13,6 +15,7 @@ class PmergeMe {
 	public:
 		PmergeMe();
 		PmergeMe( char *[] , size_t );
+
 		~PmergeMe();
 
 		void	FJASqueue( void );
@@ -20,5 +23,12 @@ class PmergeMe {
 
 		void	printQueue( void );
 		void	printList( void );
-	};
 
+
+		class ExceptionError: public std::exception {
+			public:
+			const char* what() const throw() {
+				return ("Error");
+			}
+		};
+	};

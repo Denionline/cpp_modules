@@ -5,8 +5,9 @@ PmergeMe::PmergeMe(): _data_queue(), _data_list()
 
 PmergeMe::PmergeMe( char *args[] , size_t len ) {
 	for (size_t i = 0; i < len; i++) {
-		size_t	n = std::atoi(args[i]);
+		int	n = std::atoi(args[i]);
 
+		if (n < 0) throw ExceptionError();
 		_data_queue.push(n);
 		_data_list.push_back(n);
 	}
@@ -33,8 +34,7 @@ static void sortedInsertQueue(std::queue<int>& q, int value) {
 	if (!inserted)
 			temp.push(value);
 
-	while (!temp.empty())
-	{
+	while (!temp.empty()) {
 			q.push(temp.front());
 			temp.pop();
 	}
@@ -86,12 +86,11 @@ void	PmergeMe::FJASqueue( void ) {
 void	PmergeMe::printQueue( void ) {
 	std::queue<int>	c(_data_queue);
 
-	std::cout << "Container {";
 	while (!c.empty()) {
-		std::cout << c.front() << (c.size() > 1 ? ", " : "");
+		std::cout << c.front() << (c.size() > 1 ? " " : "");
 		c.pop();
 	}
-	std::cout << "}" << std::endl;
+	std::cout << std::endl;
 }
 
 /* List Sorting */
@@ -132,14 +131,13 @@ static std::list<int> getSortedList( std::list<int> input ) {
 }
 
 void	PmergeMe::printList( void ) {
-	std::list<int>	c(_data_list);
-	std::list<int>::iterator it = c.begin(), ite = c.end();
+	std::list<int>						c(_data_list);
+	std::list<int>::iterator	it = c.begin(), ite = c.end();
 
-	std::cout << "Container {";
 	while (it != ite) {
-		std::cout << *(it++) << (it != ite ? ", " : "");
+		std::cout << *(it++) << (it != ite ? " " : "");
 	}
-	std::cout << "}" << std::endl;
+	std::cout << std::endl;
 }
 
 void	PmergeMe::FJASlist( void ) {
