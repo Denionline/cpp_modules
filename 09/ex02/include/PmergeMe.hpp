@@ -16,7 +16,8 @@ class PmergeMe {
 	public:
 		PmergeMe();
 		PmergeMe( char *[] , size_t );
-
+		PmergeMe( const PmergeMe& );
+		PmergeMe&	operator=( const PmergeMe& );
 		~PmergeMe();
 
 		void	FJASqueue( void );

@@ -13,6 +13,18 @@ PmergeMe::PmergeMe( char *args[] , size_t len ) {
 	}
 }
 
+PmergeMe::PmergeMe( const PmergeMe& copy ) {
+	*this = copy;
+}
+
+PmergeMe&	PmergeMe::operator=( const PmergeMe& copy ) {
+	if (this != &copy) {
+		this->_data_list = copy._data_list;
+		this->_data_queue = copy._data_queue;
+	}
+	return (*this);
+}
+
 PmergeMe::~PmergeMe()
 {}
 
@@ -44,9 +56,7 @@ static std::queue<int> getSortedQueue( std::queue<int> input ) {
 	if (input.size() <= 1)
 			return input;
 
-	std::queue<int> small;
-	std::queue<int> large;
-
+	std::queue<int> small, large;
 	while (!input.empty()) {
 			int a = input.front(); input.pop();
 
@@ -57,14 +67,8 @@ static std::queue<int> getSortedQueue( std::queue<int> input ) {
 
 			int b = input.front(); input.pop();
 
-			if (a < b) {
-					small.push(a);
-					large.push(b);
-			}
-			else {
-					small.push(b);
-					large.push(a);
-			}
+			small.push(a < b ? a : b);
+			large.push(a > b ? a : b);
 	}
 
 	std::queue<int> mainChain = getSortedQueue(large);
@@ -97,8 +101,8 @@ static std::list<int> getSortedList( std::list<int> input ) {
 	if (input.size() <= 1)
 			return input;
 
-	std::list<int> small, large;
-	std::list<int>::iterator it = input.begin(), ite = input.end();
+	std::list<int>::iterator	it = input.begin(), ite = input.end();
+	std::list<int>						small, large;
 	while (it != ite) {
 		int	a = *it++;
 		if (it == ite) {
@@ -113,10 +117,8 @@ static std::list<int> getSortedList( std::list<int> input ) {
 	}
 
 	std::list<int> mainChain = getSortedList(large);
-
-	for (std::list<int>::iterator sit = small.begin(); sit != small.end(); ++sit)
-			sortedInsertList(mainChain, *sit);
-
+	for (std::list<int>::iterator cit = small.begin(); cit != small.end(); ++cit)
+			sortedInsertList(mainChain, *cit);
 	return (mainChain);
 }
 

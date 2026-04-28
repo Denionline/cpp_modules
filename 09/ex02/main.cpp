@@ -11,6 +11,7 @@ int	main( int argc , char *argv[] ) {
 	}
 
 	try {
+		if (argc > 3000) throw PmergeMe::ExceptionError();
 		PmergeMe	numbers(argv, argc);
 
 
@@ -34,14 +35,14 @@ int	main( int argc , char *argv[] ) {
 		std::cout
 		<< "Time to process a range of "
 		<< argc
-		<< "elements with std::list : "
+		<< " elements with std::list : "
 		<< std::fixed << std::setprecision(5) << listElapsed / 1e6 << " us"
 		<< std::endl;
 
 		std::cout
 		<< "Time to process a range of "
 		<< argc
-		<< "elements with std::queue : "
+		<< " elements with std::queue : "
 		<< std::fixed << std::setprecision(5) << queueElapsed / 1e6 << " us"
 		<< std::endl;
 	}
