@@ -83,16 +83,6 @@ void	PmergeMe::FJASqueue( void ) {
 	_data_queue = getSortedQueue(_data_queue);
 }
 
-void	PmergeMe::printQueue( void ) {
-	std::queue<int>	c(_data_queue);
-
-	while (!c.empty()) {
-		std::cout << c.front() << (c.size() > 1 ? " " : "");
-		c.pop();
-	}
-	std::cout << std::endl;
-}
-
 /* List Sorting */
 
 static void sortedInsertList(std::list<int>& l, int value) {
@@ -130,16 +120,24 @@ static std::list<int> getSortedList( std::list<int> input ) {
 	return (mainChain);
 }
 
-void	PmergeMe::printList( void ) {
-	std::list<int>						c(_data_list);
-	std::list<int>::iterator	it = c.begin(), ite = c.end();
-
-	while (it != ite) {
-		std::cout << *(it++) << (it != ite ? " " : "");
-	}
-	std::cout << std::endl;
-}
-
 void	PmergeMe::FJASlist( void ) {
 	_data_list = getSortedList(_data_list);
+}
+
+std::list<int>	PmergeMe::getData( void ) {
+	return (_data_list);
+}
+
+std::ostream&	operator<<( std::ostream& o , PmergeMe data ) {
+	std::list<int>						c(data.getData());
+	std::list<int>::iterator	it = c.begin(), ite = c.end();
+
+	for (int i = 0; it != ite; i++) {
+		if (i >= 4) {
+			o << "[...]";
+			break;
+		}
+		o  << *(it++) << (it != ite ? " " : "");
+	}
+	return (o);
 }

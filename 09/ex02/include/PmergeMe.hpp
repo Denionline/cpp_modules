@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <iomanip>
 #include <cstdlib>
 #include <sys/time.h>
 /* Containers */
@@ -21,14 +22,14 @@ class PmergeMe {
 		void	FJASqueue( void );
 		void	FJASlist( void );
 
-		void	printQueue( void );
-		void	printList( void );
-
+		std::list<int>	getData( void );
 
 		class ExceptionError: public std::exception {
 			public:
-			const char* what() const throw() {
-				return ("Error");
-			}
+				const char* what() const throw() {
+					return ("Error");
+				}
 		};
-	};
+};
+
+std::ostream&	operator<<( std::ostream& o , PmergeMe data );
