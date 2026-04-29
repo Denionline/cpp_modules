@@ -60,7 +60,7 @@ void	RPN::resolveNotation( void ) {
 		if (std::isdigit(_data[i])) {
 			numbers.push_back(_data[i] - '0');
 		} else {
-			if (i < 2)
+			if (numbers.size() < 2)
 				throw ExceptionError();
 
 			const size_t	nSize = numbers.size();
