@@ -28,7 +28,7 @@ static bool	isAllDigit( std::string s ) {
 std::vector<Data>	BitcoinExchange::parseDataFile( std::string fileName ) {
 	std::vector<Data>	array;
 	std::fstream			file(fileName.c_str());
-	char							del = fileName.find(".csv") != std::string::npos ? ',' : '|';
+	char							del = fileName.find("data.csv") != std::string::npos ? ',' : '|';
 
 	try {
 		if (fileName.empty() || !file.is_open())
